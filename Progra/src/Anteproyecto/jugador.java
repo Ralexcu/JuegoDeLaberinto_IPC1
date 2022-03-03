@@ -8,6 +8,7 @@ public class jugador {
     int movimientosTotales;
     int oroTotal;
     int wins;
+    int laberintosCreados;
 
     public int getFila() {
         return fila;
@@ -63,5 +64,12 @@ public class jugador {
 
     public void setWins(int wins) {
         this.wins = wins;
+    }
+
+    public int getLaberintosCreados(){
+        return laberintosCreados;
+    }
+    public void setLaberintosCreados(int laberintosCreados){
+        this.laberintosCreados = laberintosCreados;
     }
 }

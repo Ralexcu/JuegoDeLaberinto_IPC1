@@ -12,6 +12,7 @@ public class juego {
     Laberinto laberintodefault;
     // Constructor juego, en este inicializamos el laberinto por defecto
     public juego() {
+        player.setLaberintosCreados(0);
         char[][] matrizDefault = {{'#','O','#','#','#','#','#','O','O','#','#','#','#','#','#','#','#','#','#','#','#','#','#','O','O','#','O','#','#','#'}
         ,{'#','O','#','O','O','O','#','O','#','O','O','O','O','O','O','O','O','O','O','O','O','O','O','#','O','#','O','O','O','S'}
         ,{'#','G','O','O','#','O','#','O','O','#','O','#','#','#','#','#','#','O','#','#','#','O','O','O','O','#','O','#','#','#'}
@@ -92,6 +93,7 @@ public class juego {
         listadoLaberintos[laberintosCreados] = laberintoaux;
         laberintosCreados++;
         System.out.println("Laberinto No." + (laberintosCreados - 1) + " Creado con Exito");
+        player.setLaberintosCreados(player.getLaberintosCreados()+1);
         presionatecla();
     }
     // Reportes
@@ -99,7 +101,14 @@ public class juego {
         System.out.println("Partidas Ganadas: "+player.getWins());
         System.out.println("Oro total: "+player.getOroTotal());
         System.out.println("Movimientos totales: "+player.getMovimientosTotales());
-        //Mapa mas jugado
+        int masJugado = listadoLaberintos[0].getVecesJugado();
+        int masWins =  listadoLaberintos[0].getVecesWin();
+        int masLoses = listadoLaberintos[0].getVecesLose();
+        for (int i=0; i < player.getLaberintosCreados(); i++){
+            if (listadoLaberintos[i].getVecesJugado()>masJugado){
+                masJugado = listadoLaberintos[i].getVecesJugado();
+            }
+        }
         //Mapa en el que mas se ha perdido
         //Mapa en el que mas se ha ganado
         System.out.println("Total de mapas creados: "+listadoLaberintos.length);
@@ -251,6 +260,7 @@ public class juego {
                             if (listadoLaberintos[seleccionlab].getMatriz()[player.getFila()][player.getColumna()] == 'S') {
                                 System.out.println("Felicidades haz ganado");
                                 listadoLaberintos[seleccionlab].setVecesWin(listadoLaberintos[seleccionlab].getVecesWin()+1);
+                                player.setWins(player.getWins()+1);
                                 reportes();
                                 salir = 1;
                             } else {
